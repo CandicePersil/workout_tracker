@@ -31,13 +31,15 @@ class ExerciseBase(BaseModel):
     workout_id: int
 
 
-class ExerciseCreate(ExerciseBase):
-    pass
+class ExerciseCreate(BaseModel):
+    movement_name: str
+    reps: str
+    weight: float
+    workout_id: int
 
 
 class Exercise(ExerciseBase):
     id: int
-    movement: Movement
 
     class Config:
         orm_mode = True
