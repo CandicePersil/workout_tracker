@@ -72,7 +72,7 @@ def get_workouts(skip: int = 0, limit: int = 100, db: Session = Depends(get_db))
     return workouts
 
 
-@app.post("/workouts/", response_model=workout_shema.Workout)
+@app.post("/workouts/", response_model=workout_shema.WorkoutCreate)
 def create_workout(
     workout: workout_shema.WorkoutCreate, db: Session = Depends(get_db)
 ) -> dict[str, Any]:

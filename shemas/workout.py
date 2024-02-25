@@ -47,7 +47,6 @@ class Exercise(ExerciseBase):
 
 class WorkoutBase(BaseModel):
     date: date
-    exercises: list[Exercise] = []
 
 
 class WorkoutCreate(WorkoutBase):
@@ -55,6 +54,7 @@ class WorkoutCreate(WorkoutBase):
 
 
 class Workout(WorkoutBase):
+    exercises: list[Exercise] = []
     id: int
 
     class Config:
