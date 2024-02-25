@@ -13,6 +13,7 @@ class Movement(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, index=True)
     name: Mapped[str] = mapped_column(unique=True, index=True)
+    type: Mapped[str] = mapped_column(unique=False, index=True)
 
 
 class Exercise(Base):

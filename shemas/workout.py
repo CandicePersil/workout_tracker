@@ -9,8 +9,24 @@ class SBDMovements(Enum):
     DEADLIFT = "deadlift"
 
 
+class MovementType(Enum):
+    PECTORALS = "pectorals"
+    BACK = "back"
+    BISEPS = "biseps"
+    TRISEPS = "triseps"
+    SHOULDERS = "shoulders"
+    ABDOMINAUX = "abdominals"
+    QUADRICEPS = "quadriceps"
+    ISCHIOS = "ischios"
+    CALVES = "calves"
+    FOREARMS = "forearms"
+    ARMS = "arms"
+    LEGS = "legs"
+
+
 class MovementBase(BaseModel):
     name: str
+    type: str
 
 
 class MovementCreate(MovementBase):

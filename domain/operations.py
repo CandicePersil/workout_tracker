@@ -9,8 +9,17 @@ class InsertWorkoutException(Exception):
     pass
 
 
+class CreateMovementException(Exception):
+    pass
+
+
 def create_movement(db: Session, movement: workout_schema.MovementCreate):
-    db_movement = models.Movement(**movement.model_dump())
+    movement_input = movement.model_dump()
+    try:
+        workout_schema.MovementType(movement_input.get("type"))
+    except ValueError:
+        raise CreateMovementException("Wrong movement type!")
+    db_movement = models.Movement(**movement_input)
     db.add(db_movement)
     db.commit()
     db.refresh(db_movement)
