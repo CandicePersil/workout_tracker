@@ -2,10 +2,29 @@ from sqlalchemy.orm import Session
 
 from db import models
 from shemas import workout as workout_schema
+from domain import queries
 
 
 class InsertWorkoutException(Exception):
     pass
+
+
+def create_movement(db: Session, movement: workout_schema.MovementCreate):
+    db_movement = models.Movement(**movement.model_dump())
+    db.add(db_movement)
+    db.commit()
+    db.refresh(db_movement)
+    return db_movement
+
+
+def create_exercise(db: Session, exercise: workout_schema.ExerciseCreate):
+    exercise_input = exercise.model_dump()
+    movement = queries.get_movement_by_name(db, exercise_input.pop("movement_name"))
+    db_exercise = models.Exercise(**exercise_input, movement_id=movement.id)
+    db.add(db_exercise)
+    db.commit()
+    db.refresh(db_exercise)
+    return db_exercise
 
 
 def create_workout(db: Session, workout: workout_schema.WorkoutCreate):
